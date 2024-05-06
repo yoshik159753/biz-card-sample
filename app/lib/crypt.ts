@@ -26,11 +26,11 @@ export function encryptText(text: string) {
   const iv = crypto.randomBytes(IV_SIZE);
   const cipher = createDecipheriv(iv);
   const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
-  return Buffer.concat([iv, encrypted]).toString("base64");
+  return Buffer.concat([iv, encrypted]).toString("base64url");
 }
 
 export function decryptText(encryptedData: string) {
-  const encryptedBuffer = Buffer.from(encryptedData, "base64");
+  const encryptedBuffer = Buffer.from(encryptedData, "base64url");
   const iv = encryptedBuffer.subarray(0, IV_SIZE);
   const encrypted = encryptedBuffer.subarray(IV_SIZE);
   const decipher = createDecipheriv(iv);
