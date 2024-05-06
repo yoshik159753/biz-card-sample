@@ -13,7 +13,7 @@ export function generateAccessToken() {
   return encryptDateTimeToToken(dayjs());
 }
 
-export function isInvalidAccessToken(token: string) {
+export function isInvalidClientToken(token: string) {
   try {
     return decryptTokenToDateTime(token)
       .add(Number(process.env.ACCESS_TOKEN_EXPIRATION_MONTH), "M")
@@ -25,5 +25,6 @@ export function isInvalidAccessToken(token: string) {
 }
 
 export function isValidOwnerToken(token: string) {
-  return token == process.env.OWNER_TOKEN;
+  // TODO: cookie のあれこれを復号化してチェックしてOKなら true
+  return token === "lee";
 }

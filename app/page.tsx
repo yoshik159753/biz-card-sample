@@ -1,25 +1,31 @@
 import { cookies } from "next/headers";
-import AuthOwner from "@/app/AuthOwner";
+import { isInvalidClientToken, isValidOwnerToken } from "@/app/lib/auth";
+import Owner from "@/app/ui/owner";
+import Forbidden from "@/app/ui/forbidden";
+import Client from "@/app/ui/client";
+import AuthOwner from "@/app/ui/auth-owner";
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    token?: string;
+  };
+}) {
   const cookieStore = cookies();
 
-  const token = cookieStore.has("name")
+  const ownerToken = cookieStore.has("name")
     ? cookieStore.get("name").value
     : undefined;
 
-  function isValidOwnerToken(token: string) {
-    // TODO: cookie のあれこれを復号化してチェックしてOKなら true
-    return token === "lee";
+  if (isValidOwnerToken(ownerToken)) {
+    return <Owner></Owner>;
   }
-
-  return (
-    <>
-      {isValidOwnerToken(token) ? (
-        <h1>Owner Page!!!</h1>
-      ) : (
-        <AuthOwner></AuthOwner>
-      )}
-    </>
-  );
+  if (!searchParams.token) {
+    return <AuthOwner></AuthOwner>;
+  }
+  if (isInvalidClientToken(searchParams.token)) {
+    return <Forbidden></Forbidden>;
+  }
+  return <Client></Client>;
 }
