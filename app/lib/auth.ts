@@ -23,3 +23,7 @@ export function isInvalidAccessToken(token: string) {
     return true;
   }
 }
+
+export function isValidOwnerToken(token: string) {
+  return token == process.env.OWNER_TOKEN;
+}
