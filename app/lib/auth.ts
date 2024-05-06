@@ -14,8 +14,12 @@ export function generateAccessToken() {
 }
 
 export function isInvalidAccessToken(token: string) {
-  return decryptTokenToDateTime(token)
-    .add(Number(process.env.ACCESS_TOKEN_EXPIRATION_MONTH), "M")
-    .add(Number(process.env.ACCESS_TOKEN_EXPIRATION_DAY_OF_MONTH), "d")
-    .isBefore(dayjs());
+  try {
+    return decryptTokenToDateTime(token)
+      .add(Number(process.env.ACCESS_TOKEN_EXPIRATION_MONTH), "M")
+      .add(Number(process.env.ACCESS_TOKEN_EXPIRATION_DAY_OF_MONTH), "d")
+      .isBefore(dayjs());
+  } catch {
+    return true;
+  }
 }
