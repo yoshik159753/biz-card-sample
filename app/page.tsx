@@ -14,11 +14,11 @@ export default async function Page({
 }) {
   const cookieStore = cookies();
 
-  const ownerToken = cookieStore.has("name")
-    ? cookieStore.get("name").value
+  const ownerToken = cookieStore.has("token")
+    ? cookieStore.get("token").value
     : undefined;
 
-  if (isValidOwnerToken(ownerToken)) {
+  if (ownerToken && isValidOwnerToken(ownerToken)) {
     return <Owner></Owner>;
   }
   if (!searchParams.token) {

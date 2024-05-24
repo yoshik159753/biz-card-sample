@@ -27,6 +27,5 @@ export function isInvalidClientToken(token: string) {
 }
 
 export function isValidOwnerToken(token: string) {
-  // TODO: cookie のあれこれを復号化してチェックしてOKなら true
-  return token === "lee";
+  return decryptTokenToDateTime(token).isValid();
 }
