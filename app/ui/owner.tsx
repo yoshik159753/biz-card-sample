@@ -1,16 +1,37 @@
-import { generateAccessToken } from "@/app/lib/auth";
-import Image from "next/image";
-import QRCode from "qrcode";
+import { CompanyOverview } from "@/app/ui/company-overview";
+import {
+  ProfileCompany,
+  ProfileHeaderLogo,
+  ProfileLogo,
+  ProfileLayout,
+  ProfileRedirectClientPageQRCode,
+  ProfileUser,
+} from "@/app/ui/profile";
+import {
+  companyOverviewStyle,
+  containerStyle,
+  profileContainerStyle,
+} from "@/app/ui/style";
 
 export default async function Owner() {
-  const token = generateAccessToken();
-  const url = `${process.env.BASE_URL}/?token=${token}`;
-  const qrcodeImg = await QRCode.toDataURL(url);
   return (
     <>
-      <h1>Owner page</h1>
-      <p>token: {token}</p>
-      <Image src={qrcodeImg} width={150} height={150} alt="qrcode" />
+      <div className={containerStyle}>
+        <div className={profileContainerStyle}>
+          <ProfileLayout>
+            <ProfileHeaderLogo />
+            <ProfileLogo />
+            <div className="mt-8 flex">
+              <ProfileRedirectClientPageQRCode />
+              <ProfileUser />
+            </div>
+            <ProfileCompany />
+          </ProfileLayout>
+        </div>
+        <div className={companyOverviewStyle}>
+          <CompanyOverview />
+        </div>
+      </div>
     </>
   );
 }
