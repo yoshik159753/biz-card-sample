@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { isInvalidClientToken, isValidOwnerToken } from "@/app/lib/auth";
 import Owner from "@/app/ui/owner";
-import Forbidden from "@/app/ui/forbidden";
+import PermissionDenied from "@/app/ui/permission-denied";
 import Client from "@/app/ui/client";
 import AuthOwner from "@/app/ui/auth-owner";
 
@@ -25,7 +25,7 @@ export default async function Page({
     return <AuthOwner></AuthOwner>;
   }
   if (isInvalidClientToken(searchParams.token)) {
-    return <Forbidden></Forbidden>;
+    return <PermissionDenied></PermissionDenied>;
   }
   return <Client></Client>;
 }
