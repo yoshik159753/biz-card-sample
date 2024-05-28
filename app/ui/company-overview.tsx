@@ -2,7 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 function Header({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-red-500 text-white">
+    <div className="bg-red-800 text-white">
       <div className={`px-3 py-3 font-medium`}>{children}</div>
     </div>
   );
@@ -49,13 +49,13 @@ export function CompanyOverview() {
     <>
       <div className="px-3 pt-5">
         <div>
-          <h1 className="text-xl underline">会社概要</h1>
+          <h1 className="text-xl underline">概要</h1>
         </div>
         <div className="mt-3">
           <LinkHeader href="https://example.com">caption</LinkHeader>
         </div>
         <div className="mt-3">
-          <Header>活用事例</Header>
+          <Header>リンク</Header>
           <ul className="list-none border border-gray-300 border-t-0 divide-y divide-gray-300">
             <li>
               <LinkListItem href="https://example.com">
