@@ -18,14 +18,18 @@ export default async function Page({
     ? cookieStore.get("token").value
     : undefined;
 
-  if (ownerToken && isValidOwnerToken(ownerToken)) {
-    return <Owner></Owner>;
+  if (searchParams.token) {
+    return isInvalidClientToken(searchParams.token) ? (
+      <PermissionDenied />
+    ) : (
+      <Client />
+    );
   }
-  if (!searchParams.token) {
-    return <AuthOwner></AuthOwner>;
-  }
-  if (isInvalidClientToken(searchParams.token)) {
-    return <PermissionDenied></PermissionDenied>;
-  }
-  return <Client></Client>;
+
+  return !!process.env.SHOULD_SKIP_OWNER_TOKEN_AUTHENTICATION ||
+    (ownerToken && isValidOwnerToken(ownerToken)) ? (
+    <Owner />
+  ) : (
+    <AuthOwner />
+  );
 }
