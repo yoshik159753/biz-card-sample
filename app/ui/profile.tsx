@@ -41,7 +41,7 @@ export function ProfileLogo() {
 
 export async function ProfileRedirectClientPageQRCode() {
   const token = generateAccessToken();
-  const url = `${process.env.BASE_URL}/?token=${token}`;
+  const url = `${process.env.BASE_URL}/${token}`;
   const qrcodeImg = await QRCode.toDataURL(url);
   return (
     <div>
