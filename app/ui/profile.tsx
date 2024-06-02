@@ -23,14 +23,6 @@ export function ProfileLayout({ children }: { children: React.ReactNode }) {
   return <div className="px-10 font-mono">{children}</div>;
 }
 
-export function ProfileHeaderLogo() {
-  return (
-    <div>
-      <p className="mb-40">&nbsp;</p>
-    </div>
-  );
-}
-
 export function ProfileLogo() {
   return (
     <div className="mt-8">

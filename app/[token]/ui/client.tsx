@@ -1,7 +1,6 @@
 import { CompanyOverview } from "@/app/ui/company-overview";
 import {
   ProfileCompany,
-  ProfileHeaderLogo,
   ProfileLogo,
   ProfileLayout,
   ProfileUser,
@@ -18,7 +17,6 @@ export default async function Owner() {
       <div className={containerStyle}>
         <div className={profileContainerStyle}>
           <ProfileLayout>
-            <ProfileHeaderLogo />
             <ProfileLogo />
             <div className="mt-8">
               <ProfileUser />
